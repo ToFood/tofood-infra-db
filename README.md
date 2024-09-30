@@ -4,10 +4,20 @@ Este repositório contém a infraestrutura necessária para configurar o banco d
 
 ## 📂 Estrutura do Repositório
 
-/tofood-infra-db ├── main.tf # Arquivo principal do Terraform ├── variables.tf # Definição das variáveis utilizadas no projeto ├── outputs.tf # Saídas do Terraform (outputs) ├── provider.tf # Configuração do provider AWS ├── documentdb.tf # Configuração do cluster DocumentDB ├── security-groups.tf # Configuração dos grupos de segurança para acesso ao banco ├── README.md # Documentação detalhada do projeto
+```bash
+/tofood-infra-db
+├── main.tf               # Arquivo principal do Terraform
+├── variables.tf          # Definição das variáveis utilizadas no projeto
+├── outputs.tf            # Saídas do Terraform (outputs)
+├── provider.tf           # Configuração do provider AWS
+├── documentdb.tf         # Configuração do cluster DocumentDB
+├── security-groups.tf    # Configuração dos grupos de segurança para acesso ao banco
+└── README.md             # Documentação do projeto
+```
+
+# Documentação detalhada do projeto
 
 markdown
-Copiar código
 
 ## 🚀 Recursos Utilizados
 
@@ -48,7 +58,7 @@ Define as saídas do Terraform para fácil consulta dos recursos criados, como o
 
 1. **Clone o Repositório**:
    ```sh
-   git clone https://github.com/seu-usuario/tofood-infra-db.git
+   git clone https://github.com/ToFood/tofood-infra-db.git
    cd tofood-infra-db
 Inicialize o Terraform:
 
