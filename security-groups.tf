@@ -21,3 +21,4 @@ resource "aws_security_group" "documentdb_sg" {
     Name = "tofood-documentdb-sg"
   }
 }
+
