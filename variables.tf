@@ -10,13 +10,15 @@ variable "cluster_identifier" {
 
 variable "db_username" {
   description = "Database username"
-  default     = "admin"
+  type        = string
+  default     = "leonardo10sp" 
 }
 
 variable "db_password" {
   description = "Database password"
   type        = string
   sensitive   = true
+  default     = "atmgdtdt66" 
 }
 
 variable "vpc_id" {
