@@ -1,13 +1,13 @@
-name: Deploy DB Infra - Terraform
+name: Test Terraform
 
 on:
-  push:
+  pull_request:
     branches:
       - "main"
 
 jobs:
-  deploy:
-    name: Deploy Terraform DB Infrastructure
+  test-terraform:
+    name: Test Terraform
     runs-on: ubuntu-latest
 
     env:
@@ -17,7 +17,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
       AWS_DEFAULT_REGION: ${{ vars.AWS_REGION }}
-      KUBERNETES_CLUSTER_NAME: ${{ vars.KUBERNETES_CLUSTER_NAME }}
+      KUBERNETES_CLUSTER_NAME: "tofood-eks-cluster" # Valor fixo do nome do cluster
 
     steps:
       # 1. Checkout do código-fonte
@@ -54,19 +54,3 @@ jobs:
       # 7. Planejar as mudanças de infraestrutura e salvar o plano
       - name: Terraform Plan
         run: terraform plan -out=tfplan
-
-      # 8. Aplicar o plano (somente na branch principal)
-      - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
-
-      # 9. Verificar o estado do Terraform para outputs e debug
-      - name: Show Terraform State
-        run: terraform show
-
-      # 10. Adicione uma etapa para verificar o status do cluster
-      - name: Wait for EKS cluster to be ready
-        run: |
-          until aws eks describe-cluster --name $KUBERNETES_CLUSTER_NAME --region ${{ env.AWS_REGION }} --query "cluster.status" --output text | grep -q "ACTIVE"; do
-            echo "Waiting for EKS cluster to be ACTIVE..."
-            sleep 30
-          done
